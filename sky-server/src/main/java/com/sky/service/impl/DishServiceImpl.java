@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,6 +32,10 @@ public class DishServiceImpl implements DishService {
     private DishFlavorMapper flavorMapper;
     @Autowired
     private SetmealDishMapper setmealDishMapper;
+
+    /**
+     * @param dishDTO
+     */
 
     @Transactional
     public void save(DishDTO dishDTO) {
@@ -61,7 +66,7 @@ public class DishServiceImpl implements DishService {
     /**
      * @param ids
      */
-    @Override
+    @Transactional
     public void deleteBatch(List<Long> ids) {
         //判断菜品是否启售中
         ids.forEach(it -> {
@@ -82,6 +87,55 @@ public class DishServiceImpl implements DishService {
         dishMapper.deleteBatch(ids);
         //删除口味
         flavorMapper.deleteBatch(ids);
+    }
+
+    /**
+     *
+     * @param dishDTO
+     */
+    @Transactional
+    public void update(DishDTO dishDTO) {
+        Dish dish = new Dish();
+
+        // 拷贝属性
+        BeanUtils.copyProperties(dishDTO, dish);
+
+        //插入菜品表
+        dishMapper.update(dish);
+        //删除口味表
+        List<Long> id =new ArrayList<>();
+        id.add(dishDTO.getId());
+        flavorMapper.deleteBatch(id);
+        //插入口味表
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        if (!CollectionUtils.isEmpty(flavors) && flavors.size() > 0) {
+            //循环插入口味表
+            flavors.forEach(flavor -> {
+                //在插入口味前，赋值口味对应的菜品id
+                flavor.setDishId(dish.getId());
+                //插入口味表
+                flavorMapper.insert(flavor);
+            });
+        }
+    }
+
+
+    /**
+     * @param id
+     * @return
+     */
+
+    @Transactional
+    public DishVO getById(Long id) {
+        //根据id查询菜品信息
+        Dish dish = dishMapper.getById(id);
+        //根据id查询口味信息
+        List<DishFlavor> flavors = flavorMapper.getByDishId(id);
+        //  创建菜品VO对象
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(flavors);
+        return dishVO;
     }
 
     /**

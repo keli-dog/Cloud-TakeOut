@@ -24,7 +24,6 @@ public class DishController {
     private DishService dishService;
 
     /**
-     *
      * @param dishDTO
      * @return
      */
@@ -37,7 +36,6 @@ public class DishController {
     }
 
     /**
-     *
      * @param ids
      * @return
      */
@@ -48,9 +46,26 @@ public class DishController {
         dishService.deleteBatch(ids);
         return Result.success();
     }
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO) {
+        log.info("修改菜品：{}", dishDTO);
+        dishService.update(dishDTO);
+        return Result.success();
+    }
+    /**
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据菜品id获取菜品")
+    public Result<DishVO> getById(@PathVariable Long id) {
+        log.info("根据菜品id获取菜品：{}", id);
+        DishVO dishVO = dishService.getById(id);
+        return Result.success(dishVO);
+    }
 
     /**
-     *
      * @param dishPageQueryDTO
      * @return
      */
@@ -58,7 +73,7 @@ public class DishController {
     @ApiOperation("获取菜品分页详情")
     public Result<PageResult> detail(DishPageQueryDTO dishPageQueryDTO) {
         log.info("获取菜品详情：{}", dishPageQueryDTO);
-        PageResult pageResult =dishService.pageQuery(dishPageQueryDTO);
+        PageResult pageResult = dishService.pageQuery(dishPageQueryDTO);
         return Result.success(pageResult);
     }
 }

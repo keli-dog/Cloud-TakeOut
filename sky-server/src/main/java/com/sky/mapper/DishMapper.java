@@ -24,27 +24,34 @@ public interface DishMapper {
     Integer countByCategoryId(Long categoryId);
 
     /**
-     *
      * @param dish
      */
     @AutoFill(OperationType.INSERT)
     void insert(Dish dish);
 
+
     /**
-     *
-     * @param dishPageQueryDTO
-     * @return
+     * @param ids
      */
-    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
 
     void deleteBatch(List<Long> ids);
 
     /**
-     *
+     * @param dish
+     */
+    @AutoFill(OperationType.UPDATE)
+    void update(Dish dish);
+
+    /**
      * @param id
      * @return
      */
     @Select("select * from dish where id = #{id}")
     Dish getById(Long id);
 
+    /**
+     * @param dishPageQueryDTO
+     * @return
+     */
+    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
 }
