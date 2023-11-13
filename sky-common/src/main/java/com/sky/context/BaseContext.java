@@ -9,6 +9,7 @@ public class BaseContext {
     }
 
     public static Long getCurrentId() {
+        System.out.println(threadLocal.get());
         return threadLocal.get();
     }
 

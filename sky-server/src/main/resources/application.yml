@@ -37,3 +37,8 @@ sky:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+  alioss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    access-key-id: LTAI5tS14JJHy3quXak3yj6a
+    access-key-secret: gB5hMcfn570xWcgh1pu0Y4fPB3192T
+    bucket-name: gengzeyu-bucket
