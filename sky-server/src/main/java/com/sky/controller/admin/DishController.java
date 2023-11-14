@@ -64,7 +64,15 @@ public class DishController {
         DishVO dishVO = dishService.getById(id);
         return Result.success(dishVO);
     }
+@GetMapping("/list")
+@ApiOperation("获取菜品列表")
+public Result<List<DishVO>> list(@RequestParam Long categoryId) {
 
+    log.info("获取菜品列表：{}", categoryId);
+
+    List<DishVO> dishVOlist = dishService.getByCategoryId(categoryId);
+    return Result.success(dishVOlist);
+}
     /**
      * @param dishPageQueryDTO
      * @return

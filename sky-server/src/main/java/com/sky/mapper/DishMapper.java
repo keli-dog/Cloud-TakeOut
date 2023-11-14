@@ -50,6 +50,14 @@ public interface DishMapper {
     Dish getById(Long id);
 
     /**
+     *
+     * @param categoryId
+     * @return
+     */
+    @Select("select * from dish where category_id = #{categoryId}")
+    List<DishVO> getByCategoryId(Long categoryId);
+
+    /**
      * @param dishPageQueryDTO
      * @return
      */

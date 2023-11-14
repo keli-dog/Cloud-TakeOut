@@ -138,6 +138,12 @@ public class DishServiceImpl implements DishService {
         return dishVO;
     }
 
+    @Override
+    public List<DishVO> getByCategoryId(Long categoryid) {
+        List<DishVO> dishVOList = dishMapper.getByCategoryId(categoryid);
+        return dishVOList;
+    }
+
     /**
      * @param dishPageQueryDTO
      * @return
