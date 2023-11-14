@@ -3,8 +3,10 @@ package com.sky.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sky.context.BaseContext;
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
+import com.sky.entity.Dish;
 import com.sky.entity.Setmeal;
 import com.sky.entity.SetmealDish;
 import com.sky.mapper.SetmealDishMapper;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +82,22 @@ public class SetmealServiceImpl implements SetmealService {
                 setmealDishMapper.insert(setmealDish);
             });
         }
+    }
+    /**
+     *
+     * @param status
+     * @param id
+     */
+
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Setmeal setmeal = Setmeal.builder()
+                .id(id)
+                .status(status)
+                .updateTime(LocalDateTime.now())
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+        setmealMapper.update(setmeal);
     }
 
 

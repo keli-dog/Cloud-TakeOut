@@ -40,19 +40,6 @@ public class CategoryController {
         return Result.success();
     }
 
-    /**
-     * 分类分页查询
-     * @param categoryPageQueryDTO
-     * @return
-     */
-    @GetMapping("/page")
-    @ApiOperation("分类分页查询")
-    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
-        log.info("分页查询：{}", categoryPageQueryDTO);
-        PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
-        List<Object> ls=new ArrayList<>();
-        return Result.success(pageResult);
-    }
 
     /**
      * 删除分类
@@ -88,6 +75,7 @@ public class CategoryController {
     @PostMapping("/status/{status}")
     @ApiOperation("启用禁用分类")
     public Result<String> startOrStop(@PathVariable("status") Integer status, Long id){
+        log.info("启用禁用分类：{},{}", status, id);
         categoryService.startOrStop(status,id);
         return Result.success();
     }
@@ -102,5 +90,19 @@ public class CategoryController {
     public Result<List<Category>> list(Integer type){
         List<Category> list = categoryService.list(type);
         return Result.success(list);
+    }
+
+    /**
+     * 分类分页查询
+     * @param categoryPageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("分类分页查询")
+    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
+        log.info("分页查询：{}", categoryPageQueryDTO);
+        PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
+        List<Object> ls=new ArrayList<>();
+        return Result.success(pageResult);
     }
 }

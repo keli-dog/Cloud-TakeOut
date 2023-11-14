@@ -46,6 +46,13 @@ public class DishController {
         dishService.deleteBatch(ids);
         return Result.success();
     }
+
+    /**
+     *
+     * @param dishDTO
+     * @return
+     */
+
     @PutMapping
     @ApiOperation("修改菜品")
     public Result update(@RequestBody DishDTO dishDTO) {
@@ -53,6 +60,21 @@ public class DishController {
         dishService.update(dishDTO);
         return Result.success();
     }
+
+    /**
+     * 启售停售菜品
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启售停售菜品")
+    public Result<String> startOrStop(@PathVariable("status") Integer status, Long id){
+        log.info("启售停售菜品：status={},id={}", status, id);
+        dishService.startOrStop(status,id);
+        return Result.success();
+    }
+
     /**
      * @param id
      * @return
@@ -64,15 +86,19 @@ public class DishController {
         DishVO dishVO = dishService.getById(id);
         return Result.success(dishVO);
     }
-@GetMapping("/list")
-@ApiOperation("获取菜品列表")
-public Result<List<DishVO>> list(@RequestParam Long categoryId) {
 
-    log.info("获取菜品列表：{}", categoryId);
+    /**
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/list")
+    @ApiOperation("获取菜品列表")
+    public Result<List<DishVO>> list(@RequestParam Long categoryId) {
+        log.info("获取菜品列表：{}", categoryId);
+        List<DishVO> dishVOlist = dishService.getByCategoryId(categoryId);
+        return Result.success(dishVOlist);
+    }
 
-    List<DishVO> dishVOlist = dishService.getByCategoryId(categoryId);
-    return Result.success(dishVOlist);
-}
     /**
      * @param dishPageQueryDTO
      * @return

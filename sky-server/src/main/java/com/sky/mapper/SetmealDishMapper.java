@@ -14,7 +14,8 @@ public interface SetmealDishMapper {
      *
      * @param setmealDish
      */
-    @Insert("insert into setmeal_dish (setmeal_id,dish_id,name,price,copies) VALUES"+ " (#{setmealId}, #{dishId}, #{name}, #{price},#{copies})")
+    @Insert("insert into setmeal_dish (setmeal_id,dish_id,name,price,copies) VALUES"+
+            " (#{setmealId}, #{dishId}, #{name}, #{price},#{copies})")
     void insert(SetmealDish setmealDish);
 
     /**
