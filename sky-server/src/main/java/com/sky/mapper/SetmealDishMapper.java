@@ -1,6 +1,5 @@
 package com.sky.mapper;
 
-import com.sky.entity.DishFlavor;
 import com.sky.entity.SetmealDish;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,15 +26,15 @@ public interface SetmealDishMapper {
     /**
      * 根据套餐id获取套餐菜单
      *
-     * @param id
+     * @param setmeal_id
      * @return
      */
-    @Select("select * from setmeal_dish where setmeal_id = #{id}")
-    List<SetmealDish> getBySetmealId(Long id);
+    @Select("select * from setmeal_dish where setmeal_id = #{setmeal_id}")
+    List<SetmealDish> getBySetmealId(Long setmeal_id);
     /**
      * @param dishId
      * @return
      */
-    @Select("select * from setmeal_dish where id = #{dishId}")
+    @Select("select setmeal_id from setmeal_dish where dish_id = #{dishId}")
     Long getSetmealIdByDishId(Long dishId);
 }

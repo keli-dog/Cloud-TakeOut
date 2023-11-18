@@ -10,11 +10,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.event.WindowFocusListener;
 import java.util.List;
 
 @RequestMapping("admin/setmeal")
@@ -88,7 +85,7 @@ public class SetmealController {
     @GetMapping("/{id}")
     @ApiOperation("根据套餐id获取套餐")
     public Result<SetmealVO> get(@PathVariable Long id) {
-        log.info("根据套餐id获取菜品：{}", id);
+        log.info("根据套餐id获取套餐：{}", id);
         SetmealVO setmealVO = setmealService.getById(id);
         return Result.success(setmealVO);
     }

@@ -15,4 +15,5 @@ public interface DishService {
     DishVO getById(Long id);
     List<DishVO> getByCategoryId(Long categoryid);
     PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO);
+    List<DishVO> listWithFlavor(Long categoryId);
 }

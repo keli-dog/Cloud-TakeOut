@@ -2,11 +2,11 @@ package com.sky.mapper;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
-import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Setmeal;
 import com.sky.enumeration.OperationType;
-import org.apache.ibatis.annotations.Insert;
+import com.sky.vo.DishItemVO;
+import com.sky.vo.SetmealVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -37,10 +37,28 @@ public interface SetmealMapper {
     Setmeal getById(Long id);
 
     /**
+     *
+     * @param categoryId
+     * @return
+     */
+    @Select("select * from setmeal where category_id = #{categoryId}")
+    List<Setmeal> getByCategoryId(Long categoryId);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @Select("select sd.name,sd.copies,d.image,d.description from setmeal_dish sd left join dish d " +
+            "on sd.dish_id=d.id" +
+            " where setmeal_id = #{id}")
+    List<DishItemVO> getDishItemBySetmealId(Long id);
+
+    /**
      * @param setmealPageQueryDTO
      * @return
      */
-    Page<Setmeal> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
 
     /**
      * 根据分类id查询套餐的数量

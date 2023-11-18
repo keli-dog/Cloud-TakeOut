@@ -7,13 +7,15 @@ import com.sky.constant.StatusConstant;
 import com.sky.context.BaseContext;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
-import com.sky.entity.Category;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
+import com.sky.entity.Setmeal;
 import com.sky.exception.DeletionNotAllowedException;
+import com.sky.exception.DishDisableFailedException;
 import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
+import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
@@ -33,6 +35,8 @@ public class DishServiceImpl implements DishService {
     private DishMapper dishMapper;
     @Autowired
     private DishFlavorMapper flavorMapper;
+    @Autowired
+    private SetmealMapper setmealMapper;
     @Autowired
     private SetmealDishMapper setmealDishMapper;
 
@@ -130,6 +134,15 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public void startOrStop(Integer status, Long id) {
+        if(status == StatusConstant.DISABLE){//在停售时需要判断，菜品是否关联启售套餐
+            Long setmealIdByDishId = setmealDishMapper.getSetmealIdByDishId(id);
+            if (setmealIdByDishId != null) {
+                Setmeal setmeal = setmealMapper.getById(setmealIdByDishId);
+                if (setmeal.getStatus() == StatusConstant.ENABLE) {
+                    throw new DishDisableFailedException(MessageConstant.DISH_DISABLE_FAILED);
+                }
+            }
+        }
         Dish dish = Dish.builder()
                 .id(id)
                 .status(status)
@@ -175,5 +188,18 @@ public class DishServiceImpl implements DishService {
         PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
         Page<DishVO> page = dishMapper.pageQuery(dishPageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    public List<DishVO> listWithFlavor(Long categoryid) {
+        List<DishVO> dishVOList = dishMapper.getByCategoryId(categoryid);
+
+        for (DishVO dishVO : dishVOList) {
+            //根据菜品id查询对应的口味
+            List<DishFlavor> flavors = flavorMapper.getByDishId(dishVO.getId());
+            dishVO.setFlavors(flavors);
+        }
+
+        return dishVOList;
     }
 }
