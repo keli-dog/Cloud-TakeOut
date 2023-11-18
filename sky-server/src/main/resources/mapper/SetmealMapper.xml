@@ -50,7 +50,7 @@
         </foreach>
     </delete>
 
-    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+    <select id="pageQuery" resultType="com.sky.vo.SetmealVO">
         select s.*, c.name as category_name
         from setmeal s
         left outer join category c
