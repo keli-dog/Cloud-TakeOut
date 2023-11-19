@@ -10,9 +10,7 @@ import com.sky.vo.SetmealVO;
 import java.util.List;
 
 public interface SetmealService {
-
     void save(SetmealDTO setmealDTO);
-
     void delete(List<Long> ids);
     void update(SetmealDTO setmealDTO);
     void startOrStop(Integer status, Long id);

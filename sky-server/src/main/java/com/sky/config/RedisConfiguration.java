@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfiguration {
     @Bean
     public RedisTemplate redisTemplate(RedisConnectionFactory factory) {
-        log.info("初始化RedisTemplate对象");
+        log.info("初始化RedisTemplate对象...");
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(factory);
         //  使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
