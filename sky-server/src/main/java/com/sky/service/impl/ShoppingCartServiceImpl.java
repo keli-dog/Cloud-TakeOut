@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,7 +33,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      *
      * @param shoppingCartDTO
      */
-    @Override
+    @Transactional
     public void add(ShoppingCartDTO shoppingCartDTO) {
         //创建购物车对象
         ShoppingCart shoppingCart = new ShoppingCart();
@@ -79,7 +80,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      * @param shoppingCartDTO
      */
 
-    @Override
+    @Transactional
     public void sub(ShoppingCartDTO shoppingCartDTO) {
         //创建购物车对象
         ShoppingCart shoppingCart = new ShoppingCart();

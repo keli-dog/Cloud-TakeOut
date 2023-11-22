@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("admin/dish")
-@Api("菜品管理接口")
+@Api(tags="菜品管理接口")
 public class DishController {
     @Autowired
     private DishService dishService;

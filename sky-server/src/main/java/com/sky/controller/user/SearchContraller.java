@@ -84,7 +84,6 @@ public class SearchContraller {
     @ApiOperation("根据分类id查询套餐")
     @Cacheable(cacheNames = "setmeal", key = "#categoryId")
     public Result<List<Setmeal>> setmealList(Long categoryId) {
-        ;
         log.info("根据分类id查询套餐：{}", categoryId);
         List<Setmeal> list = setmealService.getByCategoryId(categoryId);
         return Result.success(list);
