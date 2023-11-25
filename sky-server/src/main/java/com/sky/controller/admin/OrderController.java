@@ -71,7 +71,7 @@ public class OrderController {
     @PutMapping("/delivery/{id}")
     @ApiOperation("派送订单")
     public Result setStatusAsDelivery(@PathVariable("id") Long id) {
-        log.info("支付成功"+id);
+        log.info("派送订单"+id);
         orderService.setStatusAsDelivery(id);
         return Result.success(LocalDateTime.now());
     }

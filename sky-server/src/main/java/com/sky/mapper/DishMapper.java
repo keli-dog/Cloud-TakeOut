@@ -62,4 +62,12 @@ public interface DishMapper {
      * @return
      */
     Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+    /**
+     *
+     * @return
+     */
+
+    @Select("select * from dish")
+    List<Dish> list();
 }

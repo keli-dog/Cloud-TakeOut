@@ -10,6 +10,7 @@ import com.sky.vo.OrderSubmitVO;
 import com.sky.vo.OrderVO;
 
 public interface OrderService {
+    //商家端
     OrderSubmitVO createOrder(OrdersSubmitDTO orderSubmitVDTO);
     OrderVO getById(Long id);
     PageResult getPage(OrdersPageQueryDTO ordersPageQueryDTO);
@@ -19,10 +20,14 @@ public interface OrderService {
     void setStatusAsCancel(Long id,String cancelReason);
     void setStatusAsDelivery(Long id);
     void setStatusAsComplete(Long id);
-/**/
-    //TODO 以下代码无法使用
+
+    //用户端
     OrderPaymentVO payment(OrdersPaymentDTO ordersPaymentDTO) throws Exception;
     void paySuccess(String outTradeNo);
+    void repetitionOrder(Long id);
+    PageResult pageQueryForUser(int page, int pageSize, Integer status);
+    void userCancelById(Long id) throws Exception;
+    void reminder(Long id);
 
 
 }

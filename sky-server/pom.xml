@@ -10,13 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sky-server</artifactId>
     <dependencies>
-
+        <!--项目依赖-->
         <dependency>
             <groupId>com.sky</groupId>
             <artifactId>sky-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>com.sky</groupId>
             <artifactId>sky-pojo</artifactId>
@@ -91,7 +90,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
@@ -99,27 +97,22 @@
         <!--*********************************************************************-->
 
         <!--*****************************其他坐标***********************************-->
+        <!--   knife4j     -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
         </dependency>
-
+        <!--   websocket     -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-
+        <!--   httpclient     -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
-
-        <!-- poi -->
+        <!-- Apache poi(操作excel表) -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>

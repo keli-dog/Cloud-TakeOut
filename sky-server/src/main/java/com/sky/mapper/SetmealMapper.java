@@ -37,7 +37,6 @@ public interface SetmealMapper {
     Setmeal getById(Long id);
 
     /**
-     *
      * @param categoryId
      * @return
      */
@@ -45,7 +44,6 @@ public interface SetmealMapper {
     List<Setmeal> getByCategoryId(Long categoryId);
 
     /**
-     *
      * @param id
      * @return
      */
@@ -59,6 +57,13 @@ public interface SetmealMapper {
      * @return
      */
     Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    /**
+     *
+     * @return
+     */
+    @Select("select * from setmeal")
+    List<Setmeal> list();
 
     /**
      * 根据分类id查询套餐的数量
