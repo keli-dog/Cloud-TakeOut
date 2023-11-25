@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -32,29 +31,30 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     private SetmealMapper setmealMapper;
 
     @Override
-    public BusinessDataVO businessData() {
-        //获得当天的开始时间
-        LocalDateTime begin = LocalDateTime.now().with(LocalTime.MIN);
-        //获得当天的结束时间
-        LocalDateTime end = LocalDateTime.now().with(LocalTime.MAX);
+    public BusinessDataVO businessData(LocalDateTime begin, LocalDateTime end) {
         //获得当天新增用户
         Integer newUsers = workspaceMapper.getUserTodayCount(begin, end);
+        newUsers = newUsers==null? 0 : newUsers;
         //获得订单总数
         Integer all = workspaceMapper.OrderAllCount(begin, end);
+        all = all==null? 0 : all;
         //获得订单完成数
         Integer completed = workspaceMapper.orderCompletionCount(begin, end);
+        completed = completed==null? 0 : completed;
         //获得订单完成率
-        double orderCompletionRate = (double) completed / all;
+        Double orderCompletionRate = (double) completed / all;
+        orderCompletionRate = orderCompletionRate==null? 0.0 : orderCompletionRate;
        //获得订单完成金额
-        log.warn(""+newUsers+completed+all+orderCompletionRate);
-        double turnover = workspaceMapper.turnover(begin, end);
+        Double turnover = workspaceMapper.turnover(begin, end);
+        turnover = turnover==null ? 0.0 : turnover;
         //获得订单平均单价
-        double unitPrice = turnover / completed;
+        Double unitPrice = turnover / completed;
+        unitPrice = unitPrice==null? 0.0 : unitPrice;
         BusinessDataVO businessDataVO = BusinessDataVO.builder()
-                .turnover(Double.valueOf(String.format("%.2f", turnover)))
+                .turnover(turnover)
                 .validOrderCount(completed)
                 .orderCompletionRate(orderCompletionRate)
-                .unitPrice(Double.valueOf(String.format("%.2f", unitPrice)))
+                .unitPrice(unitPrice)
                 .newUsers(newUsers)
                 .build();
         return businessDataVO;

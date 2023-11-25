@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
 
@@ -44,6 +45,7 @@ public class ReportController {
         TurnoverReportVO turnoverReportVO = reportService.turnoverStatistics(begin, end);
         return Result.success(turnoverReportVO);
     }
+
     @GetMapping("/userStatistics")
     @ApiOperation("用户统计报表")
     public Result<UserReportVO> turnoverStatistics2(
@@ -55,6 +57,7 @@ public class ReportController {
         UserReportVO userReportVO = reportService.userStatistics(begin, end);
         return Result.success(userReportVO);
     }
+
     @GetMapping("/ordersStatistics")
     @ApiOperation("订单统计报表")
     public Result<OrderReportVO> ordersStatistics(
@@ -66,6 +69,7 @@ public class ReportController {
         OrderReportVO orderReportVO = reportService.ordersStatistics(begin, end);
         return Result.success(orderReportVO);
     }
+
     @GetMapping("/top10")
     @ApiOperation("销量前十排名")
     public Result<SalesTop10ReportVO> top10Statistics(
@@ -76,6 +80,13 @@ public class ReportController {
         log.info("销量前十排名");
         SalesTop10ReportVO salesTop10ReportVO = reportService.top10Statistics(begin, end);
         return Result.success(salesTop10ReportVO);
+    }
+
+    @GetMapping("/export")
+    @ApiOperation("导出数据")
+    public void export(HttpServletResponse response) {
+        log.info("导出数据");
+        reportService.exportData(response);
     }
 
 }
