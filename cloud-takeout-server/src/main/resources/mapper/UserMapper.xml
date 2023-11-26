@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cloud.mapper.UserMapper">
+    <!--useGeneratedKeys="true" keyProperty="id"保证将主键值回反给类-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into user (openid, name, id_number, create_time, phone, sex, avatar)
+        values (#{openid}, #{name}, #{idNumber}, #{createTime}, #{phone}, #{sex}, #{avatar})
+    </insert>
+
+</mapper>
