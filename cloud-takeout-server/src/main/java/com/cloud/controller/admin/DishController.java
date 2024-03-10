@@ -121,6 +121,7 @@ public class DishController {
         return Result.success(pageResult);
     }
 
+    
     /**
      * 清理缓存redis数据
      * @param pattern

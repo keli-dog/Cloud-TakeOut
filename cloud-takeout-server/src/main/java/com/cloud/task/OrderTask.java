@@ -20,7 +20,7 @@ public class OrderTask {
      * 定时处理超时订单
      */
 
-    @Scheduled(cron = "0 * * * * ? ")//每隔1分钟执行一次
+    @Scheduled(cron = "0 0 0 * * ? ")//每隔1分钟执行一次
     public void orderTask() {
         log.info("定时处理超时订单，{}", LocalDateTime.now());
         //当前时间-15分钟

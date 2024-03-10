@@ -8,20 +8,21 @@ spring:
     allow-circular-references: true
   datasource:
     druid:
-      driver-class-name: ${sky.datasource.driver-class-name}
-      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: ${sky.datasource.username}
-      password: ${sky.datasource.password}
+      driver-class-name: ${cloud.datasource.driver-class-name}
+      url: jdbc:mysql://${cloud.datasource.host}:${cloud.datasource.port}/${cloud.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${cloud.datasource.username}
+      password: ${cloud.datasource.password}
   redis:
-    host: ${sky.redis.host}
-    port: ${sky.redis.port}
-    password: ${sky.redis.password}
-    database: ${sky.redis.database}
+    host: ${cloud.redis.host}
+    port: ${cloud.redis.port}
+    password: ${cloud.redis.password}
+    database: ${cloud.redis.database}
+
 
 mybatis:
   #mapper配置文件
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.sky.entity
+  type-aliases-package: com.cloud.entity
   configuration:
     #开启驼峰命名
     map-underscore-to-camel-case: true
@@ -29,34 +30,34 @@ mybatis:
 logging:
   level:
     com:
-      sky:
+      cloud:
         mapper: debug
         service: info
         controller: info
         task: info
 
-sky:
+cloud:
   jwt:
-    admin-secret-key: ${sky.jwt.admin-secret-key}
-    admin-ttl: ${sky.jwt.admin-ttl}
-    admin-token-name: ${sky.jwt.admin-token-name}
-    user-secret-key: ${sky.jwt.user-secret-key}
-    user-ttl: ${sky.jwt.user-ttl}
-    user-token-name: ${sky.jwt.user-token-name}
+    admin-secret-key: ${cloud.jwt.admin-secret-key}
+    admin-ttl: ${cloud.jwt.admin-ttl}
+    admin-token-name: ${cloud.jwt.admin-token-name}
+    user-secret-key: ${cloud.jwt.user-secret-key}
+    user-ttl: ${cloud.jwt.user-ttl}
+    user-token-name: ${cloud.jwt.user-token-name}
 
   alioss:
-    endpoint: ${sky.alioss.endpoint}
-    access-key-id: ${sky.alioss.access-key-id}
-    access-key-secret: ${sky.alioss.access-key-secret}
-    bucket-name: ${sky.alioss.bucket-name}
+    endpoint: ${cloud.alioss.endpoint}
+    access-key-id: ${cloud.alioss.access-key-id}
+    access-key-secret: ${cloud.alioss.access-key-secret}
+    bucket-name: ${cloud.alioss.bucket-name}
 
   wechat:
-    appid: ${sky.wechat.appid}
-    secret: ${sky.wechat.secret}
-    mchid: ${sky.wechat.mchid}
-    mchSerialNo: ${sky.wechat.mchSerialNo}
-    privateKeyFilePath: ${sky.wechat.privateKeyFilePath}
-    apiV3Key: ${sky.wechat.apiV3Key}
-    weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
-    notifyUrl: ${sky.wechat.notifyUrl}
-    refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
+    appid: ${cloud.wechat.appid}
+    secret: ${cloud.wechat.secret}
+    mchid: ${cloud.wechat.mchid}
+    mchSerialNo: ${cloud.wechat.mchSerialNo}
+    privateKeyFilePath: ${cloud.wechat.privateKeyFilePath}
+    apiV3Key: ${cloud.wechat.apiV3Key}
+    weChatPayCertFilePath: ${cloud.wechat.weChatPayCertFilePath}
+    notifyUrl: ${cloud.wechat.notifyUrl}
+    refundNotifyUrl: ${cloud.wechat.refundNotifyUrl}

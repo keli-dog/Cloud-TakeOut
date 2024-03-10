@@ -13,9 +13,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableScheduling//开启注解方式的定时任务
 @Slf4j
 public class CloudTakeOutApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(CloudTakeOutApplication.class, args);
-        log.info("server started");
+        log.info("service was started...");
     }
 }

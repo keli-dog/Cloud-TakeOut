@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cloud-takeout-server</artifactId>
+
     <dependencies>
         <!--项目依赖-->
         <dependency>
@@ -154,5 +155,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
