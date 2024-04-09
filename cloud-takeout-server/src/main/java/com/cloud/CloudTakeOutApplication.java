@@ -18,3 +18,4 @@ public class CloudTakeOutApplication {
         log.info("service was started...");
     }
 }
+
